@@ -1,7 +1,7 @@
 import sqlite3
 
 def db_exec(command):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect('database.sqlite3')
     cursor = conn.cursor()
 
     res = None
