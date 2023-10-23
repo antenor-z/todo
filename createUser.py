@@ -1,5 +1,6 @@
 from db import db_exec
 from security import hash_password
+from getpass import getpass
 
 def create_user(username, password):
     (password_salt, password_hash) = hash_password(password)
@@ -7,6 +8,16 @@ def create_user(username, password):
             VALUES ('{username}', '{password_salt}', '{password_hash}');""")
     
 if __name__ == "__main__":
-    username = input("Name: ")
-    password = input("Password: ")
-    create_user(username, password)
+    try:
+        username = input("Name: ")
+        while True:
+            password = getpass("Password: ")
+            password2 = getpass("Repeat password: ")
+            if password == password2: break
+            print("The two passwords are not equal.")
+        
+        create_user(username, password)
+    except:
+        print("\nCtrl+C was pressed, going away. No user created.")
+
+    
