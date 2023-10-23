@@ -7,14 +7,18 @@
         <title>Edit</title>
     </head>
     <body>
-        <form action="/logout" method="post">
-            <button type="submit">logout</button>
-        </form>
+        <header>
+            <form action="/" method="get">
+                <button type="submit">Go Back</button>
+            </form>
+        </header>
         <form class="form" action="/edit/{{ todo.id }}" method="post">
             <label for="title">Title</label>
             <input name="title" id="title" type="textbox" value="{{ todo.title }}" required/>
             <label for="desc">Description</label>
             <input name="desc" id="desc" type="textbox" value="{{ todo.desc }}"/>
+            <label for="created_at">Created at</label>
+            <input name="created_at" id="created_at" type="datetime-local" value="{{ todo.created_at }}" disabled/>
             <label for="deadline">Deadline</label>
             <input name="deadline" id="deadline" type="datetime-local" value="{{ todo.deadline }}"/>
             <label for="status">Status</label>
