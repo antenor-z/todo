@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/static/style.css" />
+        <title>Add</title>
+    </head>
+    <body>
+        <form action="/logout" method="post">
+            <button type="submit">logout</button>
+        </form>
+        <form class="form" action="/add" method="post">
+            <label for="title">Title</label>
+            <input name="title" id="title" type="textbox" required/>
+            <label for="desc">Description</label>
+            <input name="desc" id="desc" type="textbox" />
+            <label for="deadline">Deadline</label>
+            <input name="deadline" id="deadline" type="datetime-local" />
+            <button type="submit">Add</button>
+        </form>
+    </body>
+</html>

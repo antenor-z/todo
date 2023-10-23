@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/static/style.css" />
+        <title>Todos</title>
+    </head>
+    <body>
+        <form action="/logout" method="post">
+            <button type="submit">logout</button>
+        </form>
+        <form class="form" action="/add" method="get">
+            <button type="submit">Add new</button>
+        </form>
+        {% for todo in todos %}
+            <div class="form">
+                <div style="border-left: 3px solid #eee; background-color: #333; padding-left: 10px; font-size: 1.4em;">{{ todo.title }}</div>
+                <div>{{ todo.desc }}</div>
+                <div style="font-size: 0.8em; text-align: right;">
+                    <!-- <div>{{ todo.created_at }}</div> -->
+                    <div style="color: #444;">{{ todo.deadline }}</div>
+                </div>
+                <div style="display: flex;">
+                    <form action="/edit/{{ todo.id }}" style="width: 50%" class="mr-8" method="get">
+                        <button style="width: 100%" type="submit">Editar</button>
+                    </form>
+                    <form action="/switch/{{ todo.id }}" style="width: 50%" method="post">
+                        <button style="width: 100%" type="submit">{{ todo.status }}</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </body>
+</html>
