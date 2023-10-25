@@ -9,10 +9,10 @@
     <body>
         <header>
             <form action="/logout" method="post">
-                <button type="submit">logout</button>
+                <button type="submit">❌ Logout</button>
             </form>
             <form action="/add" method="get">
-                <button type="submit">Add new</button>
+                <button type="submit">➕ Add new</button>
             </form>
         </header>
         {% for todo in todos %}
@@ -25,7 +25,7 @@
                         <button type="submit">{{ todo.status }}</button>
                     </form>
                     <form action="/edit/{{ todo.id }}" method="get">
-                        <button type="submit">Edit</button>
+                        <button type="submit">✏️ Edit</button>
                     </form>
                 </div>
             </div>
