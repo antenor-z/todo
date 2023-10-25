@@ -21,22 +21,25 @@ header {
     background-color: var(--color-primary-dark2);
     padding: calc(var(--spacing) / 2) var(--spacing);
 }
-button, input, select {
+input, select, textarea {
     font-size: 20px;
     outline: none;
     color-scheme: dark;
-}
-input, select {
     background-color: rgba(255, 255, 255, 0.25);
     border-radius: calc( var(--border-radius) / 2);
     color: white;
     border: solid rgba(255, 255, 255, 0) 3px;
     padding: 8px;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border: solid rgba(255, 255, 255, 0.75) 3px;
 }
+textarea {
+    resize: none;
+    height: 100px;
+}
 button {
+    font-size: 20px;
     background-color: var(--color-primary);
     color: white;
     border: var(--border-width) solid var(--color-primary);

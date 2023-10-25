@@ -29,7 +29,7 @@
             <label for="title">Title</label>
             <input name="title" id="title" type="textbox" value="{{ todo.title }}" required/>
             <label for="desc">Description</label>
-            <input name="desc" id="desc" type="textbox" value="{{ todo.desc }}"/>
+            <textarea name="desc" id="desc">{{ todo.desc }}</textarea>
             <label for="created_at">Created at</label>
             <input name="created_at" id="created_at" type="datetime-local" value="{{ todo.created_at }}" disabled/>
             <label for="deadline">Deadline</label>
