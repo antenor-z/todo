@@ -12,6 +12,19 @@
                 <button type="submit">◀ Go Back</button>
             </form>
         </header>
+        <div id="deleteDialog" style="background-color: rgba(157, 4, 4, 0.715); display: none; justify-content: center; position: absolute; top: 0; left: 0; height: 100%; width: 100%;">
+            <div style="position: absolute; top: 25%; width: 25%; min-width: 300px; background-color: black;">
+                <div class="form" style="text-align: center;" >
+                    Really delete?
+                </div>
+                <form class="form" action="/delete/{{todo.id}}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+                <div class="form">
+                    <button id="cancelDeletion" type="submit">Cancel</button>
+                </div>
+            </div>
+        </div>
         <form class="form" action="/edit/{{ todo.id }}" method="post">
             <label for="title">Title</label>
             <input name="title" id="title" type="textbox" value="{{ todo.title }}" required/>
@@ -29,8 +42,12 @@
             </select>
             <button type="submit">Save</button>
         </form>
-        <form class="form" action="/delete/{{todo.id}}" method="post">
-            <button type="submit">Delete</button>
-        </form>
+        <div class="form">
+            <button id="deleteButton" type="submit">Delete</button>
+        </div>
+        <script>
+            deleteButton.onclick = () => {deleteDialog.style.display = 'flex'}
+            cancelDeletion.onclick = () => {deleteDialog.style.display = 'none'}
+        </script>
     </body>
 </html>
