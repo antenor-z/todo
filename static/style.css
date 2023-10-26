@@ -38,6 +38,7 @@ input, select, textarea {
     color: white;
     border: solid rgba(255, 255, 255, 0) 3px;
     padding: 8px;
+    margin: calc(var(--spacing) / 3) 0;
 }
 option {
     background-color: var(--color-primary-dark2);
@@ -91,8 +92,11 @@ button:hover {
     display: grid; 
     margin: var(--spacing);
 }
-.form > *:nth-child(even) {
-    margin-bottom: var(--spacing);
+.form > label {
+    margin-top: var(--spacing);
+}
+.form > button {
+    margin: var(--spacing) 0;
 }
 .mr-8 {
     margin-right: 8px;
