@@ -23,7 +23,8 @@ def check_password(salt: str, correct_hash: str, provided_password: str) -> bool
     return hash_value == correct_hash
 
 def auth(username, password) -> bool:
-    res = db_exec(f"SELECT pass_salt, pass_hash from USER WHERE username='{username}'")
+    res = db_exec("SELECT pass_salt, pass_hash from USER WHERE username=?", (username, ))
+    print(res)
     
     if len(res) != 1:
         return False

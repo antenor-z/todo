@@ -3,26 +3,27 @@ from security import hash_password
 from db import db_exec
 
 def insert_todo(title, desc, created_at, deadline, username):
-    db_exec(f"""INSERT INTO todo (title, desc, created_at, deadline, status, username) VALUES
-                ('{title}', '{desc}', '{created_at}', '{deadline}', 'TODO', '{username}');
-            """)
+    db_exec("""INSERT INTO todo (title, desc, created_at, deadline, status, username) VALUES
+                (?, ?, ?, ?, 'TODO', ?);
+            """, (title, desc, created_at, deadline, username))
 
 def remove_todo(username, todo_id):
-    db_exec(f"DELETE FROM todo WHERE id = '{todo_id}' AND username = '{username}'")
+    db_exec("DELETE FROM todo WHERE id = ? AND username = ?", (todo_id, username))
 
 def edit_todo(title, desc, deadline, status, username, todo_id):
     if status not in ["TODO", "DOING", "DONE"]:
         raise Exception("status needs to be TODO, DOING or DONE")
 
-    db_exec(f"""UPDATE todo SET title = '{title}',
-                                desc = '{desc}',
-                                deadline = '{deadline}',
-                                status = '{status}'
-            WHERE username = '{username}' AND id = '{todo_id}'""")
+    db_exec("""UPDATE todo SET title = ?,
+                                desc = ?,
+                                deadline = ?,
+                                status = ?
+            WHERE username = ? AND id = ?""",
+            (title, desc, deadline, status, username, todo_id))
 
 def get_todos(username):
-    res = db_exec(f"""SELECT id, title, desc, created_at, deadline, status FROM todo 
-                  WHERE username = '{username}' ORDER BY deadline""")
+    res = db_exec("""SELECT id, title, desc, created_at, deadline, status FROM todo 
+                  WHERE username = ? ORDER BY deadline""", (username, ))
     
     todos = []
     for r in res:
@@ -32,8 +33,8 @@ def get_todos(username):
     return todos
 
 def get_todo(username, todo_id):
-    res = db_exec(f"""SELECT id, title, desc, created_at, deadline, status FROM todo 
-                  WHERE id = '{todo_id}' AND username = '{username}'""")
+    res = db_exec("""SELECT id, title, desc, created_at, deadline, status FROM todo 
+                  WHERE id = ? AND username = ?""", (todo_id, username))
     
     if len(res) == 0: return None
 
@@ -54,5 +55,6 @@ def switch_todo(username, todo_id):
         new_status = "DONE"
 
     if status != new_status:
-        db_exec(f"UPDATE todo SET status = '{new_status}' WHERE username = '{username}' AND id = '{todo_id}'")
+        db_exec("UPDATE todo SET status = ? WHERE username = ? AND id = ?",
+                (new_status, username, todo_id))
     
