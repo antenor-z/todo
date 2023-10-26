@@ -21,13 +21,19 @@ body {
         margin: 0 auto;
     }
 }
+main {
+    margin-top: calc(var(--spacing) * 6)
+}
 header {
     display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0; left: 0;
     justify-content: space-between;
     background-color: var(--color-primary-dark2);
     padding: calc(var(--spacing) / 1.5) var(--spacing);
     border-bottom: #4e3965 solid var(--border-width);
-    height: calc( var(--spacing) * 3);
+    box-sizing: border-box;
 }
 input, select, textarea {
     font-size: 20px;
