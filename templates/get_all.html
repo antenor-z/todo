@@ -18,7 +18,7 @@
         {% for todo in todos %}
             <div class="todo">
                 <div class="todo-title">{{ todo.title }}</div>
-                <div class="todo-desc">{% if todo.desc != "" %} {{todo.desc}} {% else %} <i>No description</i> {% endif %}</div>
+                <div class="todo-desc">{% if todo.desc != "" %} <pre>{{todo.desc}}</pre> {% else %} <i>No description</i> {% endif %}</div>
                 <div class="todo-deadline">{% if todo.deadline != "" %} Deadline {{todo.deadline}} {% else %} <i>No deadline</i> {% endif %}</div>
                 <div class="todo-bottom">
                     <form action="/switch/{{ todo.id }}" class="mr-8" method="post">

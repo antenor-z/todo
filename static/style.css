@@ -31,8 +31,14 @@ input, select, textarea {
     border: solid rgba(255, 255, 255, 0) 3px;
     padding: 8px;
 }
+option {
+    background-color: var(--color-primary-dark2);
+}
 input:focus, select:focus, textarea:focus {
     border: solid rgba(255, 255, 255, 0.75) 3px;
+}
+pre {
+    margin: 0;
 }
 textarea {
     resize: none;
