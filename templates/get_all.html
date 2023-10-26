@@ -15,6 +15,7 @@
                 <button type="submit">➕ Add new</button>
             </form>
         </header>
+        <main>
         {% for todo in todos %}
             <div class="todo">
                 <div class="todo-title">{{ todo.title }}</div>
@@ -30,5 +31,6 @@
                 </div>
             </div>
         {% endfor %}
+        </main>
     </body>
 </html>

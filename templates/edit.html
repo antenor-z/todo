@@ -25,29 +25,31 @@
                 </div>
             </div>
         </div>
-        <form class="form" action="/edit/{{ todo.id }}" method="post">
-            <label for="title">Title</label>
-            <input name="title" id="title" type="textbox" value="{{ todo.title }}" required/>
-            <label for="desc">Description</label>
-            <textarea name="desc" id="desc">{{ todo.desc }}</textarea>
-            <label for="created_at">Created at</label>
-            <input name="created_at" id="created_at" type="datetime-local" value="{{ todo.created_at }}" disabled/>
-            <label for="deadline">Deadline</label>
-            <input name="deadline" id="deadline" type="datetime-local" value="{{ todo.deadline }}"/>
-            <label for="status">Status</label>
-            <select name="status" id="status">
-                <option value="TODO" {% if todo.status == "TODO" %} selected {% endif %}>TODO</option>
-                <option value="DOING" {% if todo.status == "DOING" %} selected {% endif %}>DOING</option>
-                <option value="DONE" {% if todo.status == "DONE" %} selected {% endif %}>DONE</option>
-            </select>
-            <button type="submit">Save</button>
-        </form>
-        <div class="form">
-            <button id="deleteButton" type="submit">Delete</button>
-        </div>
-        <script>
-            deleteButton.onclick = () => {deleteDialog.style.display = 'flex'}
-            cancelDeletion.onclick = () => {deleteDialog.style.display = 'none'}
-        </script>
+        <main>
+            <form class="form" action="/edit/{{ todo.id }}" method="post">
+                <label for="title">Title</label>
+                <input name="title" id="title" type="textbox" value="{{ todo.title }}" required/>
+                <label for="desc">Description</label>
+                <textarea name="desc" id="desc">{{ todo.desc }}</textarea>
+                <label for="created_at">Created at</label>
+                <input name="created_at" id="created_at" type="datetime-local" value="{{ todo.created_at }}" disabled/>
+                <label for="deadline">Deadline</label>
+                <input name="deadline" id="deadline" type="datetime-local" value="{{ todo.deadline }}"/>
+                <label for="status">Status</label>
+                <select name="status" id="status">
+                    <option value="TODO" {% if todo.status == "TODO" %} selected {% endif %}>TODO</option>
+                    <option value="DOING" {% if todo.status == "DOING" %} selected {% endif %}>DOING</option>
+                    <option value="DONE" {% if todo.status == "DONE" %} selected {% endif %}>DONE</option>
+                </select>
+                <button type="submit">Save</button>
+            </form>
+            <div class="form">
+                <button id="deleteButton" type="submit">Delete</button>
+            </div>
+            <script>
+                deleteButton.onclick = () => {deleteDialog.style.display = 'flex'}
+                cancelDeletion.onclick = () => {deleteDialog.style.display = 'none'}
+            </script>
+        </main>
     </body>
 </html>
