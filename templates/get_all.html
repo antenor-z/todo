@@ -23,10 +23,19 @@
                 <div class="todo-deadline">{% if todo.deadline != "" %} Deadline {{todo.deadline}} {% else %} <i>No deadline</i> {% endif %}</div>
                 <div class="todo-bottom">
                     <form action="/switch/{{ todo.id }}" class="mr-8" method="post">
-                        <button type="submit">{{ todo.status }}</button>
+                        <button type="submit">
+                            {% if todo.status == 'TODO' %}
+                                🔴
+                            {% elif todo.status == 'DOING' %}
+                                🔵
+                            {% else %}
+                                🟢
+                            {% endif %}
+                            {{ todo.status }}
+                        </button>
                     </form>
                     <form action="/edit/{{ todo.id }}" method="get">
-                        <button type="submit">✏️ Edit</button>
+                        <button type="submit">✏️</button>
                     </form>
                 </div>
             </div>
