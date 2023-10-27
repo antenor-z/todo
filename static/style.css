@@ -83,7 +83,7 @@ button:hover {
     font-weight: bold;
 }
 .todo-desc {
-    margin: calc(var(--spacing))
+    margin: calc(var(--spacing)) calc(var(--spacing)) 0 calc(var(--spacing))
 }
 .todo-bottom {
     display: flex;
