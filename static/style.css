@@ -60,13 +60,13 @@ textarea {
     height: 100px;
 }
 button {
-    font-size: 20px;
+    font-size: 18px;
     background-color: var(--color-primary);
     color: white;
     border: var(--border-width) solid var(--color-primary);
     border-radius: var(--border-radius);
-    padding: 5px 20px;
-    height: 45px;
+    padding: 3px 20px;
+    height: 40px;
 }
 button:hover {
     background-color: var(--color-primary-dark2);

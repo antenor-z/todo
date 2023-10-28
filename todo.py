@@ -1,6 +1,7 @@
 import sqlite3
 from security import hash_password
 from db import db_exec
+from util import human_deadline
 
 def insert_todo(title, desc, created_at, deadline, username):
     db_exec("""INSERT INTO todo (title, desc, created_at, deadline, status, username) VALUES
@@ -28,8 +29,8 @@ def get_todos(username):
     todos = []
     for r in res:
         todos.append({"id": r[0], "title": r[1], "desc": r[2], 
-                      "created_at": r[3], "deadline": r[4], "status": r[5]})
-    
+                      "created_at": r[3], "deadline": human_deadline(r[4]), "status": r[5]})
+            
     return todos
 
 def get_todo(username, todo_id):
