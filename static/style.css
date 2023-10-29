@@ -55,6 +55,7 @@ input:focus, select:focus, textarea:focus {
 pre {
     margin: 0;
     font-family: sans-serif;
+    white-space: pre-wrap;
 }
 textarea {
     resize: none;
