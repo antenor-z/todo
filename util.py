@@ -13,6 +13,9 @@ def human_deadline(deadline):
     hours = delta.seconds // 3600
     minutes = (delta.seconds // 60) % 60
 
+    if days == 0 and hours == 0 and minutes < 1:
+        return "deadline expired just now"
+
     if days > 1: 
         ret.append(f"{days} days")
     elif days == 1:
@@ -33,7 +36,7 @@ def human_deadline(deadline):
     if len(ret) > 1:
         ret.insert(len(ret) - 1, "and")
     if len(ret) > 3:
-        ret.insert(1, ", ")
+        ret.insert(1, ",")
 
     
     if deadline >= now:
@@ -42,4 +45,4 @@ def human_deadline(deadline):
         ret.insert(0, "deadline expired")
         ret.append("ago")
 
-    return " ".join(ret).replace(" , ", ",")
+    return " ".join(ret).replace(" ,", ",")

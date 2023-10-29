@@ -54,6 +54,7 @@ input:focus, select:focus, textarea:focus {
 }
 pre {
     margin: 0;
+    font-family: sans-serif;
 }
 textarea {
     resize: none;
@@ -77,22 +78,23 @@ button:hover {
     display: grid; 
 }
 .todo-title {
-    color: var(--color-primary-dark2);
-    background-color: var(--color-secondary);
+    color: #fff;
+    background-color: var(--color-primary);
     padding: calc(var(--spacing) / 1.5) calc(var(--spacing));
-    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
 }
 .todo-desc {
-    margin: calc(var(--spacing)) calc(var(--spacing)) 0 calc(var(--spacing))
+    margin: calc(var(--spacing));
 }
 .todo-bottom {
     display: flex;
     justify-content: right;
-    margin: calc(var(--spacing))
+    margin: calc(var(--spacing));
 }
 .todo-deadline {
     font-size: 0.8em; text-align: right;
-    margin: 0 calc(var(--spacing))
+    margin: 0 calc(var(--spacing));
 }
 .form {
     display: grid; 
