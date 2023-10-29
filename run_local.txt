@@ -1,0 +1,2 @@
+docker build -t todo-image .
+docker run -d -p 5001:5001 --name todo -v ./database.sqlite3:/app/database.sqlite3 todo-image
