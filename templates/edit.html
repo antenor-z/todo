@@ -12,8 +12,8 @@
                 <button type="submit">⬅️ Go Back</button>
             </form>
         </header>
-        <div id="deleteDialog" style="background-color: rgba(140, 12, 12, 0.70); display: none; justify-content: center; position: absolute; top: 0; left: 0; height: 100%; width: 100%; backdrop-filter: blur(5px);">
-            <div style="position: absolute; top: 25%; width: 25%; min-width: 300px; background-color: black;">
+        <div id="deleteDialog" style="background-color: rgba(140, 12, 12, 0.70); display: none; justify-content: center; position: fixed; top: 0; left: 0; height: 100%; width: 100%; backdrop-filter: blur(5px);">
+            <div style="margin: auto; min-width: 300px; background-color: black;">
                 <div class="form" style="text-align: center;" >
                     ⚠️ Really delete?
                 </div>
@@ -47,8 +47,8 @@
                 <button id="deleteButton" type="submit">Delete</button>
             </div>
             <script>
-                deleteButton.onclick = () => {deleteDialog.style.display = 'flex'}
-                cancelDeletion.onclick = () => {deleteDialog.style.display = 'none'}
+                deleteButton.onclick = () => {deleteDialog.style.display = 'flex'; document.getElementsByTagName('body')[0].style.overflow = 'hidden'}
+                cancelDeletion.onclick = () => {deleteDialog.style.display = 'none'; document.getElementsByTagName('body')[0].style.overflow = 'unset'}
             </script>
         </main>
     </body>
