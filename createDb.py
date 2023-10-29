@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS user (
     pass_salt TEXT NOT NULL,
     pass_hash TEXT NOT NULL
 );
-''')
+''', ())
 
 db_exec('''
 CREATE TABLE IF NOT EXISTS todo (
@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS todo (
     username TEXT NOT NULL,
     FOREIGN KEY (username) REFERENCES user(username)
 );
-''')
+''', ())
