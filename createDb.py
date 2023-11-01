@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS todo (
     created_at DATETIME NOT NULL,
     deadline DATETIME,
     status TEXT NOT NULL,
+    priority INTEGER,
     username TEXT NOT NULL,
     FOREIGN KEY (username) REFERENCES user(username)
 );

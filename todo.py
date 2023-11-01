@@ -3,38 +3,41 @@ from security import hash_password
 from db import db_exec
 from util import human_deadline
 
-def insert_todo(title, desc, created_at, deadline, username):
-    db_exec("""INSERT INTO todo (title, desc, created_at, deadline, status, username) VALUES
-                (?, ?, ?, ?, 'TODO', ?);
-            """, (title, desc, created_at, deadline, username))
+def insert_todo(title, desc, created_at, deadline, priority, username):
+    db_exec("""INSERT INTO todo (title, desc, created_at, deadline, status, priority, username) VALUES
+                (?, ?, ?, ?, 'TODO', ?, ?);
+            """, (title, desc, created_at, deadline, priority, username))
 
 def remove_todo(username, todo_id):
     db_exec("DELETE FROM todo WHERE id = ? AND username = ?", (todo_id, username))
 
-def edit_todo(title, desc, deadline, status, username, todo_id):
+def edit_todo(title, desc, deadline, status, priority, username, todo_id):
     if status not in ["TODO", "DOING", "DONE"]:
         raise Exception("status needs to be TODO, DOING or DONE")
 
     db_exec("""UPDATE todo SET title = ?,
                                 desc = ?,
                                 deadline = ?,
-                                status = ?
+                                status = ?,
+                                priority = ?
             WHERE username = ? AND id = ?""",
-            (title, desc, deadline, status, username, todo_id))
+            (title, desc, deadline, status, priority, username, todo_id))
 
 def get_todos(username):
-    res = db_exec("""SELECT id, title, desc, created_at, deadline, status FROM todo 
+    res = db_exec("""SELECT id, title, desc, created_at, deadline, status, priority FROM todo 
                   WHERE username = ? ORDER BY deadline""", (username, ))
     
+    priorityDecoder = {None: None, 0: "Low", 1: "Medium", 2: "High"}
+
     todos = []
     for r in res:
         todos.append({"id": r[0], "title": r[1], "desc": r[2], 
-                      "created_at": r[3], "deadline": human_deadline(r[4]), "status": r[5]})
+                      "created_at": r[3], "deadline": human_deadline(r[4]), "status": r[5], "priority": priorityDecoder[r[6]]})
             
     return todos
 
 def get_todo(username, todo_id):
-    res = db_exec("""SELECT id, title, desc, created_at, deadline, status FROM todo 
+    res = db_exec("""SELECT id, title, desc, created_at, deadline, status, priority FROM todo 
                   WHERE id = ? AND username = ?""", (todo_id, username))
     
     if len(res) == 0: return None
@@ -42,7 +45,7 @@ def get_todo(username, todo_id):
     res = res[0]
 
     return {"id": res[0], "title": res[1], "desc": res[2], 
-            "created_at": res[3], "deadline": res[4], "status": res[5]}
+            "created_at": res[3], "deadline": res[4], "status": res[5], "priority": res[6]}
 
 def switch_todo(username, todo_id):
     todo = get_todo(username, todo_id)

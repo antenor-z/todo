@@ -22,21 +22,24 @@
                 <div class="todo-desc">{% if todo.desc != "" %} <pre>{{todo.desc}}</pre> {% else %} <i>No description</i> {% endif %}</div>
                 <div class="todo-deadline">{% if todo.deadline != "no deadline" %} {{todo.deadline}} {% else %} <i>no deadline</i> {% endif %}</div>
                 <div class="todo-bottom">
-                    <form action="/switch/{{ todo.id }}" class="mr-8" method="post">
-                        <button type="submit">
-                            {% if todo.status == 'TODO' %}
-                                🔴
-                            {% elif todo.status == 'DOING' %}
-                                🔵
-                            {% else %}
-                                🟢
-                            {% endif %}
-                            {{ todo.status }}
-                        </button>
-                    </form>
-                    <form action="/edit/{{ todo.id }}" method="get">
-                        <button type="submit">✏️</button>
-                    </form>
+                    <div class="priority priority-{{todo.priority}}">{{todo.priority}}</div>
+                    <div style="display: flex;">
+                        <form action="/switch/{{ todo.id }}" class="mr-8" method="post">
+                            <button type="submit">
+                                {% if todo.status == 'TODO' %}
+                                    🔴
+                                {% elif todo.status == 'DOING' %}
+                                    🔵
+                                {% else %}
+                                    🟢
+                                {% endif %}
+                                {{ todo.status }}
+                            </button>
+                        </form>
+                        <form action="/edit/{{ todo.id }}" method="get">
+                            <button type="submit">✏️</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         {% endfor %}

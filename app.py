@@ -55,7 +55,16 @@ def add_post():
     else:
         deadline = ""
 
-    insert_todo(title=title, desc=desc, created_at=created_at, deadline=deadline, username=user)
+    priority = request.form["priority"]
+    if priority == "None": priority = None
+    else:
+        try:
+            priority = int(priority)
+        except ValueError:
+            abort(400)
+        if priority not in [0, 1, 2]: abort(400)
+
+    insert_todo(title=title, desc=desc, created_at=created_at, deadline=deadline, priority=priority, username=user)
     
     return redirect(url_for('get_all'))
 
@@ -94,9 +103,18 @@ def save(id: int):
     else:
         deadline = ""
 
+    priority = request.form["priority"]
+    if priority == "None": priority = None
+    else:
+        try:
+            priority = int(priority)
+        except ValueError:
+            abort(400)
+        if priority not in [0, 1, 2]: abort(400)
+
     status = request.form["status"]
    
-    edit_todo(title=title, desc=desc, deadline=deadline, status=status, username=user, todo_id=id)
+    edit_todo(title=title, desc=desc, deadline=deadline, status=status, priority=priority, username=user, todo_id=id)
     return redirect(url_for('get_all'))
 
 @app.post("/switch/<int:id>")

@@ -1,6 +1,8 @@
 :root {
     --color-primary: #4e3965;
-    --color-secondary: #eea529;
+    --priority-yellow: #eea529;
+    --priority-green: #86de22;
+    --priority-red: #ee3329;
     --color-primary-dark: rgb(29, 24, 33);
     --color-primary-dark2: #2e213c;
     --border-width: 4px;
@@ -88,8 +90,23 @@ button:hover {
 }
 .todo-bottom {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
     margin: calc(var(--spacing));
+}
+.priority {
+    background-color: #4e3965;
+    color: white;
+    padding: 3px 10px;
+}
+.priority-Low {
+    border-left: var(--priority-green) solid 3px;
+}
+.priority-Medium {
+    border-left: var(--priority-yellow) solid 3px;
+}
+.priority-High {
+    border-left: var(--priority-red) solid 3px;
 }
 .todo-deadline {
     font-size: 0.8em; text-align: right;
