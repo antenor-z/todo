@@ -57,6 +57,16 @@ pre {
     white-space: pre-wrap;
     line-break: anywhere;
 }
+pre {
+    max-height: 4em;
+    overflow: hidden;
+    line-height: 1;
+}
+.showMore {
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--color-primary);
+}
 textarea {
     resize: none;
     height: 100px;

@@ -19,7 +19,16 @@
         {% for todo in todos %}
             <div class="todo">
                 <div class="todo-title">{{ todo.title }}</div>
-                <div class="todo-desc">{% if todo.desc != "" %} <pre>{{todo.desc}}</pre> {% else %} <i>No description</i> {% endif %}</div>
+                <div class="todo-desc">
+                    {% if todo.desc != "" %}
+                        <pre id="textBox{{todo.id}}">{{todo.desc}}</pre> 
+                        {% if todo.needsShowMore %}
+                            <a class="showMore" onclick="expOrContr(this, {{todo.id}})">[ Show more ]</a>
+                        {% endif %}
+                    {% else %} 
+                        <i>No description</i> 
+                    {% endif %}
+                </div>
                 <div class="todo-deadline">{% if todo.deadline != "no deadline" %} {{todo.deadline}} {% else %} <i>no deadline</i> {% endif %}</div>
                 <div class="todo-bottom">
                     <div class="priority priority-{{todo.priority}}">{{todo.priority}}</div>
@@ -44,5 +53,17 @@
             </div>
         {% endfor %}
         </main>
+        <script>
+            function expOrContr (el, id) {
+                const desc = document.getElementById('textBox' + id)
+                if (desc.style.maxHeight === 'none') {
+                    desc.style.maxHeight = ''
+                    el.textContent = "[ Show more ]"
+                } else {
+                    desc.style.maxHeight = 'none'
+                    el.textContent = "[ Show less ]"
+                }
+            }
+        </script>
     </body>
 </html>

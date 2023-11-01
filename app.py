@@ -75,6 +75,13 @@ def get_all():
         return redirect(url_for('login_get'))
     
     todos = get_todos(user)
+
+    for todo in todos:
+        if len(todo["desc"].split("\n")) > 4:
+            todo["needsShowMore"] = True
+        else:
+            todo["needsShowMore"] = False
+
     return render_template("get_all.html", todos=todos)
 
 @app.get("/edit/<int:id>")
