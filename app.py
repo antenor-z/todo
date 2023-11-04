@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, abort
-from security import auth
+from security import Auth
 from todo import insert_todo, edit_todo, remove_todo, get_todo, get_todos, switch_todo
 from datetime import datetime
 
@@ -8,29 +8,31 @@ app = Flask(__name__)
 with open(".secret") as f:
     app.secret_key = f.read().split("\n")[0]
 
+auth = Auth(session=session)
+
 @app.get("/login")
 def login_get():
-    if session.get("username", None):
+    if auth.get_user():
         return redirect(url_for('get_all'))
     else:
         return render_template("login.html")
 
 @app.post("/logout")
 def logout():
-    session.pop("username")
+    session.pop("id")
     return redirect(url_for('login_get'))
 
 @app.post("/login")
 def login_post():
     username = request.form["username"]
     password = request.form["password"]
-    if auth(username, password):
-        session["username"] = username
+    if auth.auth(username, password):
+        auth.make_session(username)
     return redirect(url_for('login_get'))
 
 @app.get("/add")
 def add_get():
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -38,7 +40,7 @@ def add_get():
 
 @app.post("/add")
 def add_post():
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -70,7 +72,7 @@ def add_post():
 
 @app.get("/")
 def get_all():
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -86,7 +88,7 @@ def get_all():
 
 @app.get("/edit/<int:id>")
 def edit(id: int):
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -95,7 +97,7 @@ def edit(id: int):
 
 @app.post("/edit/<int:id>")
 def save(id: int):
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -126,7 +128,7 @@ def save(id: int):
 
 @app.post("/switch/<int:id>")
 def switch(id: int):
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     
@@ -136,7 +138,7 @@ def switch(id: int):
 
 @app.post("/delete/<int:id>")
 def delete_todo(id: int):
-    user = session.get("username", None)
+    user = auth.get_user()
     if user == None:
         return redirect(url_for('login_get'))
     

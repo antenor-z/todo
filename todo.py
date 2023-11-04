@@ -1,5 +1,4 @@
 import sqlite3
-from security import hash_password
 from db import db_exec
 from util import human_deadline
 
