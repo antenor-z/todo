@@ -83,6 +83,9 @@ button {
 button:hover {
     background-color: var(--color-primary-dark2);
 }
+.todos-options {
+    margin: calc(var(--spacing));
+}
 .todo {
     background-color: var(--color-primary-dark2);
     margin: calc(var(--spacing));
