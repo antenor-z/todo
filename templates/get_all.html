@@ -16,42 +16,46 @@
             </form>
         </header>
         <main>
-        {% for todo in todos %}
-            <div class="todo">
-                <div class="todo-title">{{ todo.title }}</div>
-                <div class="todo-desc">
-                    {% if todo.desc != "" %}
-                        <pre id="textBox{{todo.id}}">{{todo.desc}}</pre> 
-                        {% if todo.needsShowMore %}
-                            <a class="showMore" onclick="expOrContr(this, {{todo.id}})">[ Show more ]</a>
+            <input type="checkbox" onclick="toggleShowDone()" id="showDone">
+            <label for="showDone">Show completed todos</label>
+            <div class="todos">
+                {% for todo in todos %}
+                <div class="todo">
+                    <div class="todo-title">{{ todo.title }}</div>
+                    <div class="todo-desc">
+                        {% if todo.desc != "" %}
+                            <pre id="textBox{{todo.id}}">{{todo.desc}}</pre> 
+                            {% if todo.needsShowMore %}
+                                <a class="showMore" onclick="expOrContr(this, {{todo.id}})">[ Show more ]</a>
+                            {% endif %}
+                        {% else %} 
+                            <i>No description</i> 
                         {% endif %}
-                    {% else %} 
-                        <i>No description</i> 
-                    {% endif %}
-                </div>
-                <div class="todo-deadline">{% if todo.deadline != "no deadline" %} {{todo.deadline}} {% else %} <i>no deadline</i> {% endif %}</div>
-                <div class="todo-bottom">
-                    <div class="priority priority-{{todo.priority}}">{{todo.priority}}</div>
-                    <div style="display: flex;">
-                        <form action="/switch/{{ todo.id }}" class="mr-8" method="post">
-                            <button type="submit">
-                                {% if todo.status == 'TODO' %}
-                                    🔴
-                                {% elif todo.status == 'DOING' %}
-                                    🔵
-                                {% else %}
-                                    🟢
-                                {% endif %}
-                                {{ todo.status }}
-                            </button>
-                        </form>
-                        <form action="/edit/{{ todo.id }}" method="get">
-                            <button type="submit">✏️</button>
-                        </form>
+                    </div>
+                    <div class="todo-deadline">{% if todo.deadline != "no deadline" %} {{todo.deadline}} {% else %} <i>no deadline</i> {% endif %}</div>
+                    <div class="todo-bottom">
+                        <div class="priority priority-{{todo.priority}}">{{todo.priority}}</div>
+                        <div style="display: flex;">
+                            <form action="/switch/{{ todo.id }}" class="mr-8" method="post">
+                                <button type="submit">
+                                    {% if todo.status == 'TODO' %}
+                                        🔴
+                                    {% elif todo.status == 'DOING' %}
+                                        🔵
+                                    {% else %}
+                                        🟢
+                                    {% endif %}
+                                    {{ todo.status }}
+                                </button>
+                            </form>
+                            <form action="/edit/{{ todo.id }}" method="get">
+                                <button type="submit">✏️</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-        {% endfor %}
         </main>
         <script>
             function expOrContr (el, id) {
@@ -64,6 +68,25 @@
                     el.textContent = "[ Show less ]"
                 }
             }
+
+            
+            function toggleShowDone() {
+                let showDone = document.getElementById("showDone").checked
+                const todos = document.getElementsByClassName("todos")[0].children
+                
+                for (todo of todos) {
+                    const status = todo.children[3].children[1].children[0].children[0].innerText
+                    
+                    if (status.endsWith("DONE") && !showDone) {
+                        todo.style.display = "none"
+                    }
+                    else {
+                        todo.style.display = ""
+                    }
+                }
+            }
+
+            toggleShowDone()
         </script>
     </body>
 </html>
