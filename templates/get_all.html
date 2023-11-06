@@ -16,8 +16,10 @@
             </form>
         </header>
         <main>
-            <input type="checkbox" onclick="toggleShowDone()" id="showDone">
-            <label for="showDone">Show completed todos</label>
+	    <div class="todos-options">
+            	<input type="checkbox" onclick="toggleShowDone()" id="showDone">
+            	<label for="showDone">Show completed todos</label>
+	    </div>
             <div class="todos">
                 {% for todo in todos %}
                 <div class="todo">
