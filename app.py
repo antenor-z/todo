@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, a
 from security import Auth
 from todo import insert_todo, edit_todo, remove_todo, get_todo, get_todos, switch_todo
 from datetime import datetime
+from a import asm
 
 app = Flask(__name__)
 
@@ -144,3 +145,21 @@ def delete_todo(id: int):
     
     remove_todo(user, id)
     return redirect(url_for('get_all')) 
+
+@app.post("/puc")
+def post_puc8():
+    user = auth.get_user()
+    if user == None:
+        return redirect(url_for('login_get'))
+    
+    assembly = request.form["assembly"]
+    machine_code = asm(assembly)
+    return render_template("puc8.html", machine=machine_code, assembly=assembly)
+
+@app.get("/puc")
+def get_puc8():
+    user = auth.get_user()
+    if user == None:
+        return redirect(url_for('login_get'))
+   
+    return render_template("puc8.html")
