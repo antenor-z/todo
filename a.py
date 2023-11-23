@@ -5,7 +5,7 @@ def asm(assembly):
     try:
         tmp.write(assembly)
         tmp.seek(0)
-        ret = subprocess.run(["python3", "-m", "puc8.asm", tmp.name], capture_output=True, text=True)
+        ret = subprocess.run(["./venv/bin/as-puc8", tmp.name], capture_output=True, text=True)
         if ret.returncode == 0:
             return ret.stdout
         else:
