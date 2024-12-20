@@ -1,0 +1,12 @@
+services:
+  todo:
+    restart: unless-stopped
+    build: .
+    volumes:
+      - ./database.sqlite3:/app/database.sqlite3
+    networks:
+      - net
+
+networks:
+  net:
+    external: true
